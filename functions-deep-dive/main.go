@@ -31,7 +31,13 @@ func main() {
 	fmt.Println(decimalNumbers)
 
 	//recursions
-	fmt.Println(factorial(20))
+	fmt.Println(factorial(8))
+
+	//variadic
+	fmt.Println(sum(1, 2, 3))
+	fmt.Println(sumup(10, 3, 8, 9, 2))
+	fmt.Println(sum(numbers...)) //spread operator to separate items from slices
+
 }
 
 // functions as parameters
@@ -73,4 +79,21 @@ func factorial(n int) int {
 		return 1
 	}
 	return n * factorial(n-1)
+}
+
+// variadic functions
+func sum(numbers ...int) int {
+	total := 0
+	for _, number := range numbers {
+		total += number
+	}
+	return total
+}
+
+func sumup(initialValue int, numbers ...int) int {
+	total := initialValue
+	for _, number := range numbers {
+		total += number
+	}
+	return total
 }
