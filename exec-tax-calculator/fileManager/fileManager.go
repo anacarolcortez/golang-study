@@ -14,6 +14,8 @@ func ReadTxtFile(fileName string) ([]string, error) {
 		return nil, errors.New("error opening file")
 	}
 
+	defer file.Close() //executes only after the function finishes processing
+
 	scanner := bufio.NewScanner(file)
 
 	var lines []string
@@ -26,8 +28,6 @@ func ReadTxtFile(fileName string) ([]string, error) {
 		return nil, errors.New("error reading file")
 	}
 
-	file.Close()
-
 	return lines, nil
 }
 
@@ -38,12 +38,12 @@ func WriteJSONFile(path string, data interface{}) error {
 		return errors.New("error creating file")
 	}
 
+	defer file.Close()
+
 	err = json.NewEncoder(file).Encode(data)
 	if err != nil {
 		return errors.New("failed to encode data to Json")
 	}
-
-	file.Close()
 
 	return nil
 }
